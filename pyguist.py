@@ -1,4 +1,5 @@
 from lang import Language
+import os
 
 languages = []
 
@@ -11,7 +12,7 @@ with open("languages.yml") as f:
     
     for line in content:
         if line.startswith("  - ."):
-            extension = line.replace("  - .", "")
+            extension = line.replace("  - .", "").strip()
             extensions.append(extension)
         elif line.startswith(" "):
             continue
@@ -26,3 +27,16 @@ with open("languages.yml") as f:
             
 for l in languages:
     pass
+
+source = "."
+
+for root, dirs, files in os.walk(source):
+        relroot = os.path.abspath(os.path.join(source))
+
+        for file in files:
+            filename = os.path.join(root, file)
+            
+            for l in languages:
+                for ext in l.extensions:
+                    if filename.endswith("." + ext):
+                        print("Found: " + filename + ", detected: " + l.lang + ", " + ext)
