@@ -39,4 +39,6 @@ for root, dirs, files in os.walk(source):
             for l in languages:
                 for ext in l.extensions:
                     if filename.endswith("." + ext):
-                        print("Found: " + filename + ", detected: " + l.lang + ", " + ext)
+                        with open(filename) as f:
+                            lines = len(f.readlines())
+                        print("Found: " + filename + ", detected: " + l.lang + ", " + ext + ", " + str(lines))
