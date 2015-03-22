@@ -44,14 +44,16 @@ for root, dirs, files in os.walk(source):
                             total += lines
                         
                         if not l.lang in array:
-                            array[l.lang] = 0
-                        array[l.lang] += lines
+                            array[l] = 0
+                        array[l] += lines
+                        
+                        l.files += 1
                         
                         
                         
 for language in array:
-    per = 100.0 * array[language] / total
-    print(language + ", " + str(per) + "%")                        
+    per = round(100.0 * array[language] / total, 2)
+    print(language.lang + ", Files: " + str(language.files) + ", " + str(per) + "%")                        
                         
                         
                         
