@@ -24,11 +24,10 @@ with open("languages.yml") as f:
                 langc = Language(line)
                 languages.append(langc)
                 extensions = []
-            
-for l in languages:
-    pass
 
 source = "."
+
+array = {}
 
 for root, dirs, files in os.walk(source):
         relroot = os.path.abspath(os.path.join(source))
@@ -41,4 +40,17 @@ for root, dirs, files in os.walk(source):
                     if filename.endswith("." + ext):
                         with open(filename) as f:
                             lines = len(f.readlines())
-                        print("Found: " + filename + ", detected: " + l.lang + ", " + ext + ", " + str(lines))
+                        
+                        if not l.lang in array:
+                            array[l.lang] = 0
+                        array[l.lang] += lines
+                        
+                        
+                        
+for language in array:
+    print(language + ", " + str(array[language]))                        
+                        
+                        
+                        
+                        
+                        
