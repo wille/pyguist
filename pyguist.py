@@ -1,6 +1,12 @@
-from lang import Language
 import os
 import argparse
+
+class Language:
+                
+    def __init__(self, lang):
+        self.lang = lang
+        self.extensions = []
+        self.files = 0
 
 argparse = argparse.ArgumentParser()
 argparse.add_argument("-d", "--directory", dest = "source")
