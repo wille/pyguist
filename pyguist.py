@@ -1,5 +1,14 @@
 from lang import Language
 import os
+import argparse
+
+argparse = argparse.ArgumentParser()
+argparse.add_argument("-d", "--directory", dest = "source")
+
+args = argparse.parse_args()
+
+global source
+source = args.source or "."
 
 languages = []
 
@@ -24,8 +33,6 @@ with open("languages.yml") as f:
                 langc = Language(line)
                 languages.append(langc)
                 extensions = []
-
-source = "."
 
 array = {}
 total = 0
