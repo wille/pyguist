@@ -10,11 +10,15 @@ class Language:
 
 argparse = argparse.ArgumentParser()
 argparse.add_argument("-d", "--directory", dest = "source")
+argparse.add_argument("-s", "--short", action = "store_true")
 
 args = argparse.parse_args()
 
 global source
 source = args.source or "."
+
+global short
+short = args.short
 
 languages = []
 
@@ -60,15 +64,12 @@ for root, dirs, files in os.walk(source):
                             array[l] = 0
                         array[l] += lines
                         
-                        l.files += 1
-                        
-                        
+                        l.files += 1                                               
                         
 for language in array:
     per = round(100.0 * array[language] / total, 2)
-    print(language.lang + ", Files: " + str(language.files) + ", " + str(per) + "%")                        
-                        
-                        
-                        
-                        
-                        
+    
+    if short:
+        print(language.lang + ":" + str(language.files) + ":" + str(per))
+    else:
+        print(language.lang + ", Files: " + str(language.files) + ", " + str(per) + "%")                     
